@@ -29,5 +29,5 @@ minecraft {
 }
 
 dependencies {
-    compile project(':PearXLibMC')
+    compile project('PearXLibMC')
 }
