@@ -11,6 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import ru.pearx.lib.math.MathUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -69,9 +70,19 @@ public class ItemDesFocus extends ItemBase
     {
         if(isSettedUp(stack))
         {
-            tooltip.add(I18n.format("item.des_focus.tooltip.location", stack.getTagCompound().getDouble("posX"), stack.getTagCompound().getDouble("posY"), stack.getTagCompound().getDouble("posZ")));
+            tooltip.add(I18n.format("item.des_focus.tooltip.location", getRoundedDouble(stack, "posX"), getRoundedDouble(stack, "posY"), getRoundedDouble(stack, "posZ")));
             tooltip.add(I18n.format("item.des_focus.tooltip.dimension", stack.getTagCompound().getInteger("dimension")));
-            tooltip.add(I18n.format("item.des_focus.tooltip.rotation", stack.getTagCompound().getFloat("rotYaw"), stack.getTagCompound().getFloat("rotPitch"), stack.getTagCompound().getFloat("rotHead")));
+            tooltip.add(I18n.format("item.des_focus.tooltip.rotation", getRoundedFloat(stack, "rotYaw"), getRoundedFloat(stack, "rotPitch"), getRoundedFloat(stack, "rotHead")));
         }
+    }
+
+    private double getRoundedDouble(ItemStack stack, String s)
+    {
+        return MathUtils.roundDouble(stack.getTagCompound().getDouble(s), 1);
+    }
+
+    private float getRoundedFloat(ItemStack stack, String s)
+    {
+        return (float)MathUtils.roundDouble(stack.getTagCompound().getFloat(s), 1);
     }
 }
