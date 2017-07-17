@@ -44,7 +44,9 @@ public class TelenergyClientEvents
     };
     static
     {
+        telenergyBar.setSize(128, 24);
         telenergyBar.setColor(Color.BLUE);
+        telenergyBar.setTextColor(Color.WHITE);
     }
 
     @SubscribeEvent

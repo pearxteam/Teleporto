@@ -1,7 +1,9 @@
 package ru.pearx.teleporto.common.caps.telenergy;
 
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -16,7 +18,18 @@ import javax.annotation.Nullable;
  */
 public class TelenergyStoreProvider implements ICapabilitySerializable<NBTTagCompound>
 {
-    public ITelenergyStore store = new TelenergyStore();
+    public ITelenergyStore store;
+
+    public TelenergyStoreProvider(EntityPlayerMP p)
+    {
+        store = new TelenergyStore(p);
+    }
+
+    public TelenergyStoreProvider(TileEntity te)
+    {
+        store = new TelenergyStore(te);
+    }
+
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
     {

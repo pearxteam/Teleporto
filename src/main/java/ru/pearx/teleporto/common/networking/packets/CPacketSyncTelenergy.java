@@ -1,4 +1,4 @@
-package ru.pearx.teleporto.common.networking;
+package ru.pearx.teleporto.common.networking.packets;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -10,37 +10,38 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 
 /*
- * Created by mrAppleXZ on 15.07.17 20:33.
+ * Created by mrAppleXZ on 15.07.17 20:29.
  */
-public class CPacketSyncMaxTelenergy implements IMessage
+public class CPacketSyncTelenergy implements IMessage
 {
-    public int max;
+    public int energy;
 
-    public CPacketSyncMaxTelenergy(int max)
+    public CPacketSyncTelenergy() {}
+    public CPacketSyncTelenergy(int energy)
     {
-        this.max = max;
+        this.energy = energy;
     }
 
     @Override
     public void fromBytes(ByteBuf buf)
     {
-        max = buf.readInt();
+        energy = buf.readInt();
     }
 
     @Override
     public void toBytes(ByteBuf buf)
     {
-        buf.writeInt(max);
+        buf.writeInt(energy);
     }
 
-    public static class Handler implements IMessageHandler<CPacketSyncMaxTelenergy, IMessage>
+    public static class Handler implements IMessageHandler<CPacketSyncTelenergy, IMessage>
     {
         @Override
         @SideOnly(Side.CLIENT)
-        public IMessage onMessage(CPacketSyncMaxTelenergy message, MessageContext ctx)
+        public IMessage onMessage(CPacketSyncTelenergy message, MessageContext ctx)
         {
             Minecraft.getMinecraft().addScheduledTask(() ->
-                    Minecraft.getMinecraft().player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).setMaxNoSync(message.max));
+                    Minecraft.getMinecraft().player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).setNoSync(message.energy));
             return null;
         }
     }

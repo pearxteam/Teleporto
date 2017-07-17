@@ -23,19 +23,21 @@ public class CapabilityEvents
     public static void onEntityCaps(AttachCapabilitiesEvent<Entity> e)
     {
         if(e.getObject() instanceof EntityPlayer)
-            e.addCapability(CapabilityRegistry.TELENERGY_STORE_NAME, new TelenergyStoreProvider());
+        {
+            e.addCapability(CapabilityRegistry.TELENERGY_STORE_NAME, new TelenergyStoreProvider((EntityPlayerMP)(e.getObject() instanceof EntityPlayerMP ? e.getObject() : null)));
+        }
     }
 
     @SubscribeEvent
     public static void onRespawn(PlayerEvent.PlayerRespawnEvent e)
     {
-        e.player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).sync((EntityPlayerMP)e.player);
+        e.player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).sync(true, true, true);
     }
 
     @SubscribeEvent
     public static void onJoin(PlayerEvent.PlayerLoggedInEvent e)
     {
-        e.player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).sync((EntityPlayerMP)e.player);
+        e.player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).sync(true, true, true);
     }
 
     @SubscribeEvent
@@ -48,6 +50,6 @@ public class CapabilityEvents
     @SubscribeEvent
     public static void onChangeDim(PlayerEvent.PlayerChangedDimensionEvent e)
     {
-        e.player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).sync((EntityPlayerMP)e.player);
+        e.player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).sync(true, true, true);
     }
 }
