@@ -14,6 +14,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,12 +27,12 @@ import ru.pearx.teleporto.common.caps.telenergy.ITelenergyStore;
 /*
  * Created by mrAppleXZ on 14.07.17 13:34.
  */
-public class ItemPrimalTalisman extends ru.pearx.teleporto.common.items.ItemBase
+public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
 {
-    public ItemPrimalTalisman()
+    public ItemPrimalTeleport()
     {
         setHasSubtypes(true);
-        setRegistryName("primal_talisman");
+        setRegistryName("primal_teleport");
     }
 
     @Override
@@ -41,17 +42,20 @@ public class ItemPrimalTalisman extends ru.pearx.teleporto.common.items.ItemBase
         if(player instanceof EntityPlayerMP)
         {
             int dimension = stack.getMetadata() == 0 ? world.provider.getDimension() : Teleporto.spawnDimension;
-            BlockPos pos = stack.getMetadata() == 0 ? world.getSpawnPoint() : DimensionManager.getWorld(Teleporto.spawnDimension).getSpawnPoint();
-
-            int cost = TeleportationUtils.countTeleport(pos, dimension, player);
-            ITelenergyStore store = player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null);
-            if(store.canTeleport(cost))
+            BlockPos pos;
+            if(stack.getMetadata() == 0)
             {
-                TeleportationUtils.teleport(pos, dimension, player);
-                store.set(store.get() - cost);
+                pos = world.getSpawnPoint();
             }
             else
-                player.sendMessage(new TextComponentTranslation("message.not_enough_telenergy.text", cost));
+            {
+                WorldServer spawn = DimensionManager.getWorld(Teleporto.spawnDimension);
+                pos = spawn.getTopSolidOrLiquidBlock(spawn.getSpawnPoint());
+            }
+
+            TeleportationUtils.teleport(pos.getX() + .5, pos.getY(), pos.getZ() + .5,
+                    player.rotationYaw, player.rotationPitch, player.getRotationYawHead(), dimension,
+                    player, player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null));
         }
         return new ActionResult<>(EnumActionResult.PASS, stack);
     }

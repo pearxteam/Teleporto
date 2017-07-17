@@ -1,2 +1,9 @@
+item.primal_teleport.name=Primal Teleport
+item.primal_teleport.global.name=Global Primal Teleport
+item.des_focus.name=Des Focus
+item.des_focus.tooltip.location=Location: x=%.1f, y=%.1f, z=%.1f
+item.des_focus.tooltip.dimension=Dimension: %s
+item.des_focus.tooltip.rotation=Rotation: yaw=%.1f, pitch=%.1f, head=%.1f
+
 misc.telenergy_bar.text=Telenergy: %1$s / %2$s
 message.not_enough_telenergy.text=§cNot enough telenergy! You need at least %s§c.

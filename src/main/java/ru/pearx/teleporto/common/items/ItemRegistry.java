@@ -16,14 +16,16 @@ import ru.pearx.teleporto.Teleporto;
 @Mod.EventBusSubscriber
 public class ItemRegistry
 {
-    public static final ItemPrimalTalisman primal_talisman = null;
+    public static final ItemPrimalTeleport primal_teleport = null;
     public static final ItemTelenergyMeter telenergy_meter = null;
+    public static final ItemDesFocus des_focus = null;
 
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> e)
     {
-        register(new ItemPrimalTalisman(), e.getRegistry());
+        register(new ItemPrimalTeleport(), e.getRegistry());
         register(new ItemTelenergyMeter(), e.getRegistry());
+        register(new ItemDesFocus(), e.getRegistry());
     }
 
     public static void register(Item itm, IForgeRegistry<Item> reg)

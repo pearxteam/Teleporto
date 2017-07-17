@@ -8,10 +8,13 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import ru.pearx.teleporto.common.caps.CapabilityRegistry;
+import ru.pearx.teleporto.common.caps.telenergy.ITelenergyStore;
 import ru.pearx.teleporto.common.networking.NetworkManager;
 import ru.pearx.teleporto.common.networking.packets.CPacketSpawnTeleportParticles;
 
@@ -41,11 +44,6 @@ public class TeleportationUtils
         {
 
         }
-    }
-
-    public static void teleport(BlockPos pos, int dimension, Entity e)
-    {
-         teleport(pos.getX() + .5, pos.getY(), pos.getZ() + .5, e.rotationYaw, e.rotationPitch, e.getRotationYawHead(), dimension, e);
     }
 
     public static void teleport(double x, double y, double z, float yaw, float pitch, float yawHead, int dimension, Entity e)
@@ -81,11 +79,6 @@ public class TeleportationUtils
                 new NetworkRegistry.TargetPoint(dimension, x, y, z, 256));
     }
 
-    public static int countTeleport(BlockPos pos, int dimension, Entity e)
-    {
-        return countTeleport(pos.getX() + .5, pos.getY(), pos.getZ() + .5, dimension, e);
-    }
-
     public static int countTeleport(double x, double y, double z, int dimension, Entity e)
     {
         int cost = 45;
@@ -94,5 +87,17 @@ public class TeleportationUtils
         else
             cost += (int)(new Vector3d(Math.abs(x - e.posX), Math.abs(y - e.posY), Math.abs(z - e.posZ)).length() / 20);
         return cost;
+    }
+
+    public static void teleport(double x, double y, double z, float yaw, float pitch, float yawHead, int dimension, Entity e, ITelenergyStore store)
+    {
+        int cost = countTeleport(x, y, z, dimension, e);
+        if(store.canTeleport(cost))
+        {
+            teleport(x, y, z, yaw, pitch, yawHead, dimension, e);
+            store.set(store.get() - cost);
+        }
+        else
+            e.sendMessage(new TextComponentTranslation("message.not_enough_telenergy.text", cost));
     }
 }
