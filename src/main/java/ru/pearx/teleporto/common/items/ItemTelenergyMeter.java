@@ -8,5 +8,6 @@ public class ItemTelenergyMeter extends ItemBase
     public ItemTelenergyMeter()
     {
         setRegistryName("telenergy_meter");
+        setMaxStackSize(1);
     }
 }

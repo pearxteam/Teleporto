@@ -4,6 +4,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import ru.pearx.teleporto.Teleporto;
+import ru.pearx.teleporto.common.GuiHandler;
 import ru.pearx.teleporto.common.networking.packets.CPacketSpawnTeleportParticles;
 import ru.pearx.teleporto.common.networking.packets.CPacketSyncMaxTelenergy;
 import ru.pearx.teleporto.common.networking.packets.CPacketSyncTelenergy;
@@ -18,6 +19,8 @@ public class NetworkManager
 
     public static void setup()
     {
+        NetworkRegistry.INSTANCE.registerGuiHandler(Teleporto.INSTANCE, new GuiHandler());
+
         int id = 0;
         INSTANCE.registerMessage(CPacketSyncTelenergy.Handler.class, CPacketSyncTelenergy.class, id++, Side.CLIENT);
         INSTANCE.registerMessage(CPacketSyncMaxTelenergy.Handler.class, CPacketSyncMaxTelenergy.class, id++, Side.CLIENT);

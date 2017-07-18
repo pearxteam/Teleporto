@@ -31,6 +31,7 @@ public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
 {
     public ItemPrimalTeleport()
     {
+        setMaxStackSize(1);
         setHasSubtypes(true);
         setRegistryName("primal_teleport");
     }

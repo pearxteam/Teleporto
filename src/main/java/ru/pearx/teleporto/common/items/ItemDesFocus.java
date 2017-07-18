@@ -24,6 +24,7 @@ public class ItemDesFocus extends ItemBase
     public ItemDesFocus()
     {
         setRegistryName("des_focus");
+        setMaxStackSize(1);
     }
 
     @Override

@@ -19,6 +19,7 @@ public class ItemRegistry
     public static final ItemPrimalTeleport primal_teleport = null;
     public static final ItemTelenergyMeter telenergy_meter = null;
     public static final ItemDesFocus des_focus = null;
+    public static final ItemEnderTeleport ender_teleport = null;
 
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> e)
@@ -26,6 +27,7 @@ public class ItemRegistry
         register(new ItemPrimalTeleport(), e.getRegistry());
         register(new ItemTelenergyMeter(), e.getRegistry());
         register(new ItemDesFocus(), e.getRegistry());
+        register(new ItemEnderTeleport(), e.getRegistry());
     }
 
     public static void register(Item itm, IForgeRegistry<Item> reg)
