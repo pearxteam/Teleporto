@@ -8,4 +8,6 @@ import ru.pearx.libmc.client.models.IModelProvider;
 public class CommonProxy
 {
     public void setupModels(IModelProvider prov) {}
+
+    public void preInit() {}
 }

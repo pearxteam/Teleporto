@@ -16,6 +16,7 @@ import ru.pearx.libmc.PXLMC;
 import ru.pearx.teleporto.common.CommonProxy;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.networking.NetworkManager;
+import ru.pearx.teleporto.common.tiles.TileRegistry;
 
 import java.io.File;
 import java.util.Collections;
@@ -57,6 +58,8 @@ public class Teleporto
         spawnDimension = conf.getInt("Spawn Dimension", "GENERAL", 0, Integer.MIN_VALUE, Integer.MAX_VALUE, "ID of the dimension that will be used for the Primal Talisman.");
         if(conf.hasChanged())
             conf.save();
+
+        proxy.preInit();
     }
 
     @Mod.EventHandler
@@ -64,5 +67,6 @@ public class Teleporto
     {
         NetworkManager.setup();
         CapabilityRegistry.setup();
+        TileRegistry.setup();
     }
 }

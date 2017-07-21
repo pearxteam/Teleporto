@@ -16,6 +16,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.TeleportationUtils;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
+import ru.pearx.teleporto.common.inventory.DesFocusHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -25,11 +26,11 @@ import javax.annotation.Nullable;
  */
 public class ItemEnderTeleport extends ItemBase
 {
-    public static final int GUI_ID = 1;
+    public static final int GUI_ID = 0;
 
     public ItemEnderTeleport()
     {
-        setRegistryName("ender_teleport");
+        setRegistryName("portable_teleport");
         setMaxStackSize(1);
     }
 
@@ -39,7 +40,7 @@ public class ItemEnderTeleport extends ItemBase
     {
         return new ICapabilitySerializable<NBTTagCompound>()
         {
-            ItemStackHandler handler = new ItemStackHandler(1);
+            DesFocusHandler handler = new DesFocusHandler();
 
             @Override
             public NBTTagCompound serializeNBT()

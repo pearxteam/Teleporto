@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": [
+      { "model": "teleporto:teleporting_station" }
+    ]
+  }
+}

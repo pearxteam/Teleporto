@@ -22,6 +22,6 @@ public class ContainerDesFocusTeleport extends ContainerDesFocus
     @Override
     public boolean canInteractWith(EntityPlayer playerIn)
     {
-        return playerIn.getHeldItem(hand).getItem() == ItemRegistry.ender_teleport;
+        return playerIn.getHeldItem(hand).getItem() == ItemRegistry.portable_teleport;
     }
 }
