@@ -8,15 +8,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.pearx.libmc.common.blocks.BlockBase;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.tiles.TileTeleportingStation;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 /*
  * Created by mrAppleXZ on 21.07.17 17:33.
@@ -81,5 +85,12 @@ public class BlockTeleportingStation extends BlockBase
     {
         playerIn.openGui(Teleporto.INSTANCE, GUI_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    {
+        worldIn.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, 0, 0, 0);
     }
 }
