@@ -2,6 +2,7 @@ package ru.pearx.teleporto.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -49,9 +50,8 @@ public class TelenergyClientEvents
     @SubscribeEvent
     public static void onRender(RenderGameOverlayEvent.Text e)
     {
-        if(Minecraft.getMinecraft().player.inventory.hasItemStack(new ItemStack(ItemRegistry.telenergy_meter)))
-        {
-            telenergyBar.render();
-        }
+        for(EnumHand hand : EnumHand.values())
+            if(Minecraft.getMinecraft().player.getHeldItem(hand).getItem() == ItemRegistry.telenergy_meter)
+                telenergyBar.render();
     }
 }

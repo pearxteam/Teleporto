@@ -26,7 +26,7 @@ public class ItemTelenergyMeter extends ItemBase
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         TileEntity te = worldIn.getTileEntity(pos);
-        if(te.hasCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null))
+        if(te != null && te.hasCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null))
         {
             ITelenergyStore store = te.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null);
             player.sendMessage(new TextComponentTranslation("message.telenergy_info.text", store.get(), store.getMax(), store.getPerSecond()));

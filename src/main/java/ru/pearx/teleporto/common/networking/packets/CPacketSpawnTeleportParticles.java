@@ -49,16 +49,27 @@ public class CPacketSpawnTeleportParticles implements IMessage
         {
             Minecraft.getMinecraft().addScheduledTask(() ->
             {
-                   for (double dx = message.from.x; dx <= message.to.x; dx += 0.05d)
-                   {
-                       for (double dy = message.from.y; dy <= message.to.y; dy += 0.05d)
-                       {
-                           for (double dz = message.from.z; dz <= message.to.z; dz += 0.05d)
-                           {
-                               Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, dx, dy, dz, 0, 0, 0);
-                           }
-                       }
-                   }
+                for (double dx = message.from.x; dx < message.to.x; dx += 0.05d)
+                {
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, dx, message.from.y, message.from.z, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, dx, message.to.y, message.from.z, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, dx, message.from.y, message.to.z, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, dx, message.to.y, message.to.z, 0, 0, 0);
+                }
+                for (double dy = message.from.y; dy < message.to.y; dy += 0.05d)
+                {
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.from.x, dy, message.from.z, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.to.x, dy, message.from.z, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.from.x, dy, message.to.z, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.to.x, dy, message.to.z, 0, 0, 0);
+                }
+                for (double dz = message.from.z; dz < message.to.z; dz += 0.05d)
+                {
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.from.x, message.from.y, dz, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.to.x, message.from.y, dz, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.from.x, message.to.y, dz, 0, 0, 0);
+                    Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.PORTAL, message.to.x, message.to.y, dz, 0, 0, 0);
+                }
             });
             return null;
         }

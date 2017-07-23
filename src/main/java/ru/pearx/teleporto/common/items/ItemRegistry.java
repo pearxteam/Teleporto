@@ -32,6 +32,7 @@ public class ItemRegistry
         register(new ItemDesFocus(), e.getRegistry());
         register(new ItemEnderTeleport(), e.getRegistry());
         register(new ItemBlockBase(BlockRegistry.teleporting_station), e.getRegistry());
+        register(new ItemTelecore(), e.getRegistry());
     }
 
     public static void register(Item itm, IForgeRegistry<Item> reg)

@@ -30,11 +30,11 @@ public class TESRTeleportingStation extends PXLFastTESR<TileTeleportingStation>
         if(ItemRegistry.des_focus.isSettedUp(te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0)))
         {
             BlockRendererDispatcher dis = Minecraft.getMinecraft().getBlockRendererDispatcher();
-            IBakedModel model = dis.getBlockModelShapes().getModelManager().getModel(new ModelResourceLocation(new ResourceLocation(Teleporto.MODID, "teleporting_station_rotating"), "normal"));
-            /*if(model instanceof StandardModels.TeleportingStationRotating)
+            IBakedModel model = dis.getBlockModelShapes().getModelManager().getModel(new ModelResourceLocation(new ResourceLocation(Teleporto.MODID, "telecore"), "normal"));
+            /*if(model instanceof StandardModels.Telecore)
             {
-                ((StandardModels.TeleportingStationRotating) model).setTelenergy(te.store.get());
-                ((StandardModels.TeleportingStationRotating) model).setMax(te.store.getMax());
+                ((StandardModels.Telecore) model).setTelenergy(te.store.get());
+                ((StandardModels.Telecore) model).setMax(te.store.getMax());
             }*/
             dis.getBlockModelRenderer().renderModelFlat(te.getWorld(), model, te.getWorld().getBlockState(te.getPos()), te.getPos(), buffer, false, MathHelper.getPositionRandom(te.getPos()));
             float rg = 1 - te.store.get() / (float)te.store.getMax();

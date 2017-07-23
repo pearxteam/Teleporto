@@ -20,7 +20,8 @@ public class ClientEvents
     public static void onModelBake(ModelBakeEvent e)
     {
         ModelUtils.register(e.getModelRegistry(), new ResourceLocation(Teleporto.MODID, "teleporting_station"), new StandardModels.TeleportingStation());
-        ModelUtils.register(e.getModelRegistry(), new ResourceLocation(Teleporto.MODID, "teleporting_station_rotating"), new StandardModels.TeleportingStationRotating());
+        ModelUtils.register(e.getModelRegistry(), new ResourceLocation(Teleporto.MODID, "telecore"), new StandardModels.Telecore());
+        ModelUtils.register(e.getModelRegistry(), new ResourceLocation(Teleporto.MODID, "telecore_item"), new StandardModels.TelecoreItem());
     }
 
     @SubscribeEvent
