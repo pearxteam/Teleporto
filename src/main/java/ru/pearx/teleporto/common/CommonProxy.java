@@ -10,4 +10,6 @@ public class CommonProxy
     public void setupModels(IModelProvider prov) {}
 
     public void preInit() {}
+
+    public void init() {}
 }

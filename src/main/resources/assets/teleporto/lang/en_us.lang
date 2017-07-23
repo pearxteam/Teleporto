@@ -9,4 +9,5 @@ item.portable_teleport.name=Portable Teleport
 
 misc.telenergy_bar.text=Telenergy: %1$s / %2$s
 message.not_enough_telenergy.text=§cNot enough telenergy! You need at least %s§c.
+message.telenergy_info.text=§aCurrent: %s§a.   Max: %s§a.   Per Second: %s§a.
 itemGroup.teleporto=Teleporto

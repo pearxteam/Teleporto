@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import ru.pearx.libmc.client.models.IModelProvider;
-import ru.pearx.libmc.common.items.ItemBlockBase;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.blocks.BlockRegistry;
 
@@ -33,7 +32,6 @@ public class ItemRegistry
         register(new ItemDesFocus(), e.getRegistry());
         register(new ItemEnderTeleport(), e.getRegistry());
         register(new ItemBlockBase(BlockRegistry.teleporting_station), e.getRegistry());
-
     }
 
     public static void register(Item itm, IForgeRegistry<Item> reg)

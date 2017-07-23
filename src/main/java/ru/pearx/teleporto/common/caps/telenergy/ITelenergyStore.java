@@ -1,8 +1,6 @@
 package ru.pearx.teleporto.common.caps.telenergy;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /*
@@ -24,6 +22,7 @@ public interface ITelenergyStore extends INBTSerializable<NBTTagCompound>
 
     void sync(boolean energy, boolean max, boolean perSecond);
     boolean canTeleport(int cost);
+
     //Server side only things \/
     int getTicks();
     void setTicks(int count);

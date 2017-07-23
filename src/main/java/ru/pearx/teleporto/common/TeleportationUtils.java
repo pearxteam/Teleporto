@@ -1,25 +1,19 @@
 package ru.pearx.teleporto.common;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.caps.telenergy.ITelenergyStore;
 import ru.pearx.teleporto.common.networking.NetworkManager;
 import ru.pearx.teleporto.common.networking.packets.CPacketSpawnTeleportParticles;
 
 import javax.vecmath.Vector3d;
-import javax.vecmath.Vector3f;
 
 /*
  * Created by mrAppleXZ on 16.07.17 15:46.
@@ -89,15 +83,17 @@ public class TeleportationUtils
         return cost;
     }
 
-    public static void teleport(double x, double y, double z, float yaw, float pitch, float yawHead, int dimension, Entity e, ITelenergyStore store)
+    public static boolean teleport(double x, double y, double z, float yaw, float pitch, float yawHead, int dimension, Entity e, ITelenergyStore store)
     {
         int cost = countTeleport(x, y, z, dimension, e);
         if(store.canTeleport(cost))
         {
             teleport(x, y, z, yaw, pitch, yawHead, dimension, e);
             store.set(store.get() - cost);
+            store.sync(true, false, false);
+            return true;
         }
-        else
-            e.sendMessage(new TextComponentTranslation("message.not_enough_telenergy.text", cost));
+        e.sendMessage(new TextComponentTranslation("message.not_enough_telenergy.text", cost));
+        return false;
     }
 }

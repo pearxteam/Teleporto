@@ -41,7 +41,7 @@ public class CPacketSyncMaxTelenergy implements IMessage
         public IMessage onMessage(CPacketSyncMaxTelenergy message, MessageContext ctx)
         {
             Minecraft.getMinecraft().addScheduledTask(() ->
-                    Minecraft.getMinecraft().player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).setMaxNoSync(message.max));
+                    Minecraft.getMinecraft().player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).setMax(message.max));
             return null;
         }
     }

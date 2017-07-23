@@ -1,6 +1,5 @@
 package ru.pearx.teleporto.common.items;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -10,9 +9,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -22,7 +18,6 @@ import ru.pearx.libmc.client.ClientUtils;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.TeleportationUtils;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
-import ru.pearx.teleporto.common.caps.telenergy.ITelenergyStore;
 
 /*
  * Created by mrAppleXZ on 14.07.17 13:34.

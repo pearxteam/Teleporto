@@ -37,7 +37,7 @@ public class TelenergyStore implements ITelenergyStore
     {
         NBTTagCompound tag = new NBTTagCompound();
         tag.setInteger("max", getMax());
-        tag.setInteger("perSecond", get());
+        tag.setInteger("energy", get());
         tag.setInteger("perSecond", getPerSecond());
         tag.setInteger("ticks", getTicks());
         return tag;
@@ -47,7 +47,7 @@ public class TelenergyStore implements ITelenergyStore
     public void deserializeNBT(NBTTagCompound nbt)
     {
         setMaxNoSync(nbt.getInteger("max"));
-        setNoSync(nbt.getInteger("perSecond"));
+        setNoSync(nbt.getInteger("energy"));
         setPerSecondNoSync(nbt.getInteger("perSecond"));
         setTicks(nbt.getInteger("ticks"));
     }

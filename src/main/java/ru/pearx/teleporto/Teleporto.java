@@ -1,18 +1,11 @@
 package ru.pearx.teleporto;
 
-import net.minecraft.util.EnumHand;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import ru.pearx.libmc.PXLMC;
 import ru.pearx.teleporto.common.CommonProxy;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.networking.NetworkManager;
@@ -35,7 +28,7 @@ public class Teleporto
     @Mod.Instance(Teleporto.MODID)
     public static Teleporto INSTANCE;
 
-    @SidedProxy(clientSide = "ru.pearx.teleporto.client.ClientProxy", serverSide = "ru.pearx.teleporto.client.ServerProxy")
+    @SidedProxy(clientSide = "ru.pearx.teleporto.client.ClientProxy", serverSide = "ru.pearx.teleporto.server.ServerProxy")
     public static CommonProxy proxy;
 
     public static File config;
@@ -68,5 +61,6 @@ public class Teleporto
         NetworkManager.setup();
         CapabilityRegistry.setup();
         TileRegistry.setup();
+        proxy.init();
     }
 }

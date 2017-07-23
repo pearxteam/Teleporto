@@ -41,7 +41,7 @@ public class CPacketSyncTelenergy implements IMessage
         public IMessage onMessage(CPacketSyncTelenergy message, MessageContext ctx)
         {
             Minecraft.getMinecraft().addScheduledTask(() ->
-                    Minecraft.getMinecraft().player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).setNoSync(message.energy));
+                    Minecraft.getMinecraft().player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).set(message.energy));
             return null;
         }
     }

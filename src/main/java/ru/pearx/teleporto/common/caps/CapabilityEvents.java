@@ -3,17 +3,13 @@ package ru.pearx.teleporto.common.caps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import ru.pearx.teleporto.Teleporto;
-import ru.pearx.teleporto.common.caps.telenergy.TelenergyStore;
 import ru.pearx.teleporto.common.caps.telenergy.TelenergyStoreProvider;
-import ru.pearx.teleporto.common.items.ItemEnderTeleport;
-import ru.pearx.teleporto.common.items.ItemRegistry;
 
 /*
  * Created by mrAppleXZ on 15.07.17 21:01.

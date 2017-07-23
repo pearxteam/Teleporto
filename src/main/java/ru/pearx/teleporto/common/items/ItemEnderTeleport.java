@@ -12,7 +12,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.TeleportationUtils;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;

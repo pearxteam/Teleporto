@@ -4,6 +4,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -15,8 +16,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ru.pearx.libmc.common.blocks.BlockBase;
+import net.minecraftforge.items.CapabilityItemHandler;
 import ru.pearx.teleporto.Teleporto;
+import ru.pearx.teleporto.common.items.ItemRegistry;
 import ru.pearx.teleporto.common.tiles.TileTeleportingStation;
 
 import javax.annotation.Nullable;
@@ -88,9 +90,23 @@ public class BlockTeleportingStation extends BlockBase
     }
 
     @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    {
+        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-        worldIn.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, 0, 0, 0);
+        TileEntity te = worldIn.getTileEntity(pos);
+        if(te instanceof TileTeleportingStation)
+        {
+            if(ItemRegistry.des_focus.isSettedUp(te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0)))
+                for(float f = 0; f < 1; f += 0.05)
+                    worldIn.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + .5, pos.getY() + f, pos.getZ() + .5, 0, 0, 0);
+        }
+
+
     }
 }
