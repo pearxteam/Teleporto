@@ -110,10 +110,10 @@ public class TelenergyStore implements ITelenergyStore
         }
         if(player != null)
         {
-            if(energy)
-                NetworkManager.INSTANCE.sendTo(new CPacketSyncTelenergy(get()), player);
             if(max)
                 NetworkManager.INSTANCE.sendTo(new CPacketSyncMaxTelenergy(getMax()), player);
+            if(energy)
+                NetworkManager.INSTANCE.sendTo(new CPacketSyncTelenergy(get()), player);
             if(perSecond)
                 NetworkManager.INSTANCE.sendTo(new CPacketSyncTelenergyPerSecond(getPerSecond()), player);
         }

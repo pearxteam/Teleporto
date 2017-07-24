@@ -6,10 +6,12 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -17,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import ru.pearx.libmc.common.ItemStackUtils;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.items.ItemRegistry;
 import ru.pearx.teleporto.common.tiles.TileTeleportingStation;
@@ -34,9 +38,10 @@ public class BlockTeleportingStation extends BlockBase
     public BlockTeleportingStation()
     {
         super(Material.IRON);
-        setRegistryName("teleporting_station");
         setUnlocalizedName("teleporting_station");
         setSoundType(SoundType.METAL);
+        setHardness(1.6f);
+        setHarvestLevel("pickaxe", 0);
     }
 
     @Override
@@ -106,7 +111,16 @@ public class BlockTeleportingStation extends BlockBase
                 for(float f = 0; f < 1; f += 0.05)
                     worldIn.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + .5, pos.getY() + f, pos.getZ() + .5, 0, 0, 0);
         }
+    }
 
-
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        TileEntity te = worldIn.getTileEntity(pos);
+        if(te != null && te instanceof TileTeleportingStation)
+        {
+            ItemStackUtils.drop(te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null), worldIn, pos);
+        }
+        super.breakBlock(worldIn, pos, state);
     }
 }

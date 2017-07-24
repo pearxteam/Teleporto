@@ -23,7 +23,6 @@ public class ItemDesFocus extends ItemBase
 {
     public ItemDesFocus()
     {
-        setRegistryName("des_focus");
         setMaxStackSize(1);
     }
 
@@ -75,6 +74,8 @@ public class ItemDesFocus extends ItemBase
             tooltip.add(I18n.format("item.des_focus.tooltip.dimension", stack.getTagCompound().getInteger("dimension")));
             tooltip.add(I18n.format("item.des_focus.tooltip.rotation", getRoundedFloat(stack, "rotYaw"), getRoundedFloat(stack, "rotPitch"), getRoundedFloat(stack, "rotHead")));
         }
+        else
+            super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     private double getRoundedDouble(ItemStack stack, String s)

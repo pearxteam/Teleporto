@@ -1,5 +1,7 @@
 package ru.pearx.teleporto.common.items;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,6 +21,9 @@ import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.TeleportationUtils;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 /*
  * Created by mrAppleXZ on 14.07.17 13:34.
  */
@@ -28,7 +33,6 @@ public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
     {
         setMaxStackSize(1);
         setHasSubtypes(true);
-        setRegistryName("primal_teleport");
     }
 
     @Override
@@ -41,7 +45,7 @@ public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
             BlockPos pos;
             if(stack.getMetadata() == 0)
             {
-                pos = world.getSpawnPoint();
+                pos = world.getTopSolidOrLiquidBlock(world.getSpawnPoint());
             }
             else
             {

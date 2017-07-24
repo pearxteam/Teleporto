@@ -14,7 +14,6 @@ public class ItemTelecore extends ItemBase
 {
     public ItemTelecore()
     {
-        setRegistryName("telecore");
     }
 
     @Override

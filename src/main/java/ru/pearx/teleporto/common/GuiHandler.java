@@ -15,7 +15,7 @@ import ru.pearx.teleporto.client.gui.inventory.GuiContainerDesFocus;
 import ru.pearx.teleporto.common.blocks.BlockTeleportingStation;
 import ru.pearx.teleporto.common.inventory.ContainerDesFocusStation;
 import ru.pearx.teleporto.common.inventory.ContainerDesFocusTeleport;
-import ru.pearx.teleporto.common.items.ItemEnderTeleport;
+import ru.pearx.teleporto.common.items.ItemPortableTeleport;
 import ru.pearx.teleporto.common.items.ItemRegistry;
 import ru.pearx.teleporto.common.tiles.TileTeleportingStation;
 
@@ -32,7 +32,7 @@ public class GuiHandler implements IGuiHandler
     {
         switch (ID)
         {
-            case ItemEnderTeleport.GUI_ID:
+            case ItemPortableTeleport.GUI_ID:
                 for(EnumHand hand : EnumHand.values())
                 {
                     ItemStack stack = player.getHeldItem(hand);
@@ -61,7 +61,7 @@ public class GuiHandler implements IGuiHandler
     {
         switch (ID)
         {
-            case ItemEnderTeleport.GUI_ID:
+            case ItemPortableTeleport.GUI_ID:
                 for(EnumHand hand : EnumHand.values())
                 {
                     ItemStack stack = player.getHeldItem(hand);

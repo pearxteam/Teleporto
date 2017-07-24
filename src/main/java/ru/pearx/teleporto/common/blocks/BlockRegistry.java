@@ -21,7 +21,7 @@ public class BlockRegistry
     @SubscribeEvent
     public static void onRegisterBlocks(RegistryEvent.Register<Block> reg)
     {
-        register(new BlockTeleportingStation(), reg.getRegistry());
+        register(new BlockTeleportingStation().setRegistryName("teleporting_station"), reg.getRegistry());
     }
 
     public static void register(Block b, IForgeRegistry<Block> reg)

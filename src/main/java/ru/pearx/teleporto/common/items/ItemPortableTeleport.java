@@ -23,13 +23,12 @@ import javax.annotation.Nullable;
 /*
  * Created by mrAppleXZ on 18.07.17 10:30.
  */
-public class ItemEnderTeleport extends ItemBase
+public class ItemPortableTeleport extends ItemBase
 {
     public static final int GUI_ID = 0;
 
-    public ItemEnderTeleport()
+    public ItemPortableTeleport()
     {
-        setRegistryName("portable_teleport");
         setMaxStackSize(1);
     }
 
