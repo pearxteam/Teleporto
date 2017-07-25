@@ -44,9 +44,8 @@ public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
         {
             int dimension = stack.getMetadata() == 0 ? world.provider.getDimension() : Teleporto.spawnDimension;
             World w = stack.getMetadata() == 0 ? world : DimensionManager.getWorld(Teleporto.spawnDimension);
-            BlockPos pos = w.provider.getSpawnCoordinate();
-            if(pos == null)
-                pos = w.provider.getSpawnPoint();
+            BlockPos spawn = w.provider.getSpawnCoordinate() != null ? w.provider.getSpawnCoordinate() : w.provider.getSpawnPoint();
+            BlockPos pos = w.isAirBlock(spawn) ? spawn : w.provider.getRandomizedSpawnPoint();
 
             TeleportationUtils.teleport(pos.getX() + .5, pos.getY(), pos.getZ() + .5,
                     player.rotationYaw, player.rotationPitch, player.getRotationYawHead(), dimension,
