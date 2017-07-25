@@ -1,7 +1,5 @@
 package ru.pearx.teleporto.common.items;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,13 +9,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.registries.ForgeRegistry;
 import ru.pearx.libmc.client.ClientUtils;
-import ru.pearx.libmc.common.ItemStackUtils;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.caps.telenergy.ITelenergyStore;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 

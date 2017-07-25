@@ -4,22 +4,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.items.ItemRegistry;
 import ru.pearx.teleporto.common.items.ItemUpgrade;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 
 /*
  * Created by mrAppleXZ on 25.07.17 7:19.

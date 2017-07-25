@@ -1,7 +1,6 @@
 package ru.pearx.teleporto.common;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import ru.pearx.teleporto.common.items.ItemRegistry;
 

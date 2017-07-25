@@ -1,7 +1,5 @@
 package ru.pearx.teleporto.common.items;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,8 +11,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldProviderEnd;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,9 +18,6 @@ import ru.pearx.libmc.client.ClientUtils;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.TeleportationUtils;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 /*
  * Created by mrAppleXZ on 14.07.17 13:34.
