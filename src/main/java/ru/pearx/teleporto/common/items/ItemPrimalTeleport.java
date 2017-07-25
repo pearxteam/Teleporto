@@ -10,6 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
@@ -45,8 +46,7 @@ public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
             int dimension = stack.getMetadata() == 0 ? world.provider.getDimension() : Teleporto.spawnDimension;
             World w = stack.getMetadata() == 0 ? world : DimensionManager.getWorld(Teleporto.spawnDimension);
             BlockPos spawn = w.provider.getSpawnCoordinate() != null ? w.provider.getSpawnCoordinate() : w.provider.getSpawnPoint();
-            BlockPos pos = w.isAirBlock(spawn) ? spawn : w.provider.getRandomizedSpawnPoint();
-
+            BlockPos pos = !w.collidesWithAnyBlock(new AxisAlignedBB(spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getX() + player.width, spawn.getY() + player.height, spawn.getZ() + player.width)) ? spawn : w.provider.getRandomizedSpawnPoint();
             TeleportationUtils.teleport(pos.getX() + .5, pos.getY(), pos.getZ() + .5,
                     player.rotationYaw, player.rotationPitch, player.getRotationYawHead(), dimension,
                     player, player.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null));
