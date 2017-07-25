@@ -6,12 +6,15 @@ import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import net.minecraftforge.fml.common.versioning.VersionRange;
 import ru.pearx.teleporto.common.CommonProxy;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.networking.NetworkManager;
 import ru.pearx.teleporto.common.tiles.TileRegistry;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collections;
 
 /*
@@ -45,6 +48,7 @@ public class Teleporto
         data.version = VERSION;
         data.modId = MODID;
         data.name = NAME;
+        data.dependencies = Arrays.asList(new DefaultArtifactVersion("pxlmc", "[1.0.0,)"));
 
         config = e.getSuggestedConfigurationFile();
         Configuration conf = new Configuration(config);
