@@ -34,7 +34,7 @@ public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
     {
         ItemStack stack = player.getHeldItem(hand);
-        if(player instanceof EntityPlayerMP)
+        if(!world.isRemote)
         {
             int dimension = stack.getMetadata() == 0 ? world.provider.getDimension() : Teleporto.spawnDimension;
             World w = stack.getMetadata() == 0 ? world : DimensionManager.getWorld(Teleporto.spawnDimension);

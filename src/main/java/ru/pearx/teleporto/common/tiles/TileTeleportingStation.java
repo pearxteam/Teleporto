@@ -87,7 +87,7 @@ public class TileTeleportingStation extends TileSyncable implements ITickable
     @Override
     public void update()
     {
-        if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
+        if(!getWorld().isRemote)
         {
             store.setTicks(store.getTicks() + 1);
 

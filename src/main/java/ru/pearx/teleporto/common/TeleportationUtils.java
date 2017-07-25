@@ -3,11 +3,20 @@ package ru.pearx.teleporto.common;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.network.play.server.SPacketEntityEffect;
+import net.minecraft.network.play.server.SPacketPlayerAbilities;
+import net.minecraft.network.play.server.SPacketRespawn;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import ru.pearx.teleporto.common.caps.telenergy.ITelenergyStore;
 import ru.pearx.teleporto.common.networking.NetworkManager;
@@ -20,40 +29,19 @@ import javax.vecmath.Vector3d;
  */
 public class TeleportationUtils
 {
-    public static class TTeleporter extends Teleporter
-    {
-        public TTeleporter(WorldServer worldIn)
-        {
-            super(worldIn);
-        }
-
-        @Override
-        public boolean placeInExistingPortal(Entity entityIn, float rotationYaw)
-        {
-            return true;
-        }
-
-        @Override
-        public void placeInPortal(Entity entityIn, float rotationYaw)
-        {
-
-        }
-    }
-
     public static void teleport(double x, double y, double z, float yaw, float pitch, float yawHead, int dimension, Entity e)
     {
         spawnTeleportParticles(e.posX, e.posY, e.posZ, e.dimension, e);
         e.getEntityWorld().playSound(null, e.posX, e.posY, e.posZ, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.MASTER, 1, 1);
         if(dimension != e.dimension)
         {
-            WorldServer w = (WorldServer) e.getEntityWorld();
             if(e instanceof EntityPlayerMP)
             {
-                e.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)e, 0, new TTeleporter(w));
+                transferPlayerToDimension((EntityPlayerMP) e, x, y, z, dimension, e.getServer().getPlayerList());
             }
             else
             {
-                e.getServer().getPlayerList().transferEntityToWorld(e, e.dimension, w, DimensionManager.getWorld(dimension), new TTeleporter(w));
+                transferEntityToDimension(e, x, y, z, dimension, e.getServer().getPlayerList());
             }
         }
         e.fallDistance = 0;
@@ -96,5 +84,51 @@ public class TeleportationUtils
         }
         e.sendMessage(new TextComponentTranslation("message.not_enough_telenergy.text", cost));
         return false;
+    }
+
+    private static void transferPlayerToDimension(EntityPlayerMP player, double x, double y, double z, int dimensionIn, PlayerList lst)
+    {
+        int i = player.dimension;
+        WorldServer worldserver = lst.getServerInstance().getWorld(player.dimension);
+        player.dimension = dimensionIn;
+        WorldServer worldserver1 = lst.getServerInstance().getWorld(player.dimension);
+        player.connection.sendPacket(new SPacketRespawn(player.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), player.interactionManager.getGameType()));
+        lst.updatePermissionLevel(player);
+        worldserver.removeEntityDangerously(player);
+        player.isDead = false;
+        transferEntityToWorld(player, x, y, z, worldserver1);
+        lst.preparePlayer(player, worldserver);
+        player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
+        player.interactionManager.setWorld(worldserver1);
+        player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
+        lst.updateTimeAndWeatherForPlayer(player, worldserver1);
+        lst.syncPlayerInventory(player);
+
+        for (PotionEffect potioneffect : player.getActivePotionEffects())
+        {
+            player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
+        }
+        net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, i, dimensionIn);
+    }
+
+    private static void transferEntityToDimension(Entity e, double x, double y, double z, int dimensionIn, PlayerList lst)
+    {
+        WorldServer worldserver = lst.getServerInstance().getWorld(e.dimension);
+        e.dimension = dimensionIn;
+        WorldServer worldserver1 = lst.getServerInstance().getWorld(e.dimension);
+        worldserver.removeEntityDangerously(e);
+        e.isDead = false;
+        transferEntityToWorld(e, x, y, z, worldserver1);
+    }
+
+    private static void transferEntityToWorld(Entity entityIn, double x, double y, double z, WorldServer toWorldIn)
+    {
+        if (entityIn.isEntityAlive())
+        {
+            entityIn.setLocationAndAngles(x, y, z, entityIn.rotationYaw, entityIn.rotationPitch);
+            toWorldIn.spawnEntity(entityIn);
+            toWorldIn.updateEntityWithOptionalForce(entityIn, false);
+        }
+        entityIn.setWorld(toWorldIn);
     }
 }
