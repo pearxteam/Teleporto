@@ -85,7 +85,7 @@ public class TelenergyStore implements ITelenergyStore
         setMaxNoSync(value);
         if(tile != null)
             tile.markDirty();
-        sync(false, true, false);
+        sync(true, true, false);
     }
 
     @Override
