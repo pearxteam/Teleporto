@@ -22,6 +22,7 @@ item.upgrade.max_capacity.tooltip=Things stores 50 more telenergy.
 item.upgrade.per_second.tooltip=Things restores 1 more telenergy per second.
 item.upgrade.max_capacity_d.tooltip=Things stores 50 less telenergy.
 item.upgrade.per_second_d.tooltip=Things restores 1 less telenergy per second.
+item.ender_circuit.name=Ender Circuit
 
 misc.telenergy_bar.text=Telenergy: %1$s / %2$s
 message.not_enough_telenergy.text=§cNot enough telenergy! You need at least %s§c.

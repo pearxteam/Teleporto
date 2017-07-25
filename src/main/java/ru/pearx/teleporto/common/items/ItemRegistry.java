@@ -23,6 +23,9 @@ public class ItemRegistry
     public static final ItemDesFocus des_focus = null;
     public static final ItemPortableTeleport portable_teleport = null;
     public static final ItemBlock teleporting_station = null;
+    public static final ItemUpgrade upgrade = null;
+    public static final ItemTelecore telecore = null;
+    public static final ItemBase ender_circuit = null;
 
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> e)
@@ -32,8 +35,10 @@ public class ItemRegistry
         register(new ItemDesFocus().setRegistryName("des_focus"), e.getRegistry());
         register(new ItemPortableTeleport().setRegistryName("portable_teleport"), e.getRegistry());
         register(new ItemBlockBase(BlockRegistry.teleporting_station), e.getRegistry());
-        register(new ItemTelecore().setRegistryName("telecore"), e.getRegistry());
         register(new ItemUpgrade().setRegistryName("upgrade"), e.getRegistry());
+        //CRAFTING ITEMS
+        register(new ItemTelecore().setRegistryName("telecore"), e.getRegistry());
+        register(new ItemBase().setRegistryName("ender_circuit"), e.getRegistry());
     }
 
     public static void register(Item itm, IForgeRegistry<Item> reg)

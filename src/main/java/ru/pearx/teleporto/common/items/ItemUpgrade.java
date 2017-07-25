@@ -26,6 +26,11 @@ import java.util.function.Predicate;
  */
 public class ItemUpgrade extends ItemBase
 {
+    public ItemUpgrade()
+    {
+        setHasSubtypes(true);
+    }
+
     public static class Entry
     {
         @FunctionalInterface
@@ -72,6 +77,14 @@ public class ItemUpgrade extends ItemBase
         REGISTRY.add(new Entry("per_second", store -> store.setPerSecond(store.getPerSecond() + 1), store -> store.getPerSecond() < Integer.MAX_VALUE));
         REGISTRY.add(new Entry("per_second_d", store -> store.setPerSecond(store.getPerSecond() - 1), store -> store.getPerSecond() > 1));
         REGISTRY.add(new Entry("max_capacity_d", store -> store.setMax(store.getMax() - 50), store -> store.getMax() > 50));
+    }
+
+    public static int getUpgradeMeta(String name)
+    {
+        for(int i = 0; i < REGISTRY.size(); i++)
+            if(REGISTRY.get(i).getName().equals(name))
+                return i;
+        return -1;
     }
 
 

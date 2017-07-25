@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "teleporto:items/upgrade.max_capacity_d"
+  }
+}
