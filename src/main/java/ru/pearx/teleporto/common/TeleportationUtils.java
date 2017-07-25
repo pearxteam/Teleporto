@@ -56,6 +56,7 @@ public class TeleportationUtils
                 e.getServer().getPlayerList().transferEntityToWorld(e, e.dimension, w, DimensionManager.getWorld(dimension), new TTeleporter(w));
             }
         }
+        e.fallDistance = 0;
         e.setPositionAndRotation(x, y, z, yaw, pitch);
         e.setRotationYawHead(yawHead);
         e.setPositionAndUpdate(x, y, z);

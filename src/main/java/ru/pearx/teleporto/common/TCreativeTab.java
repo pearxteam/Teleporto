@@ -3,6 +3,7 @@ package ru.pearx.teleporto.common;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import ru.pearx.teleporto.common.items.ItemRegistry;
 
 /*
  * Created by mrAppleXZ on 14.07.17 13:34.
@@ -18,6 +19,6 @@ public class TCreativeTab extends CreativeTabs
     @Override
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(Items.ACACIA_BOAT); //todo;
+        return new ItemStack(ItemRegistry.portable_teleport);
     }
 }

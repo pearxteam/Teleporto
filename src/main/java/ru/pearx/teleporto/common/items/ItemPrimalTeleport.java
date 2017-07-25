@@ -12,6 +12,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,16 +43,10 @@ public class ItemPrimalTeleport extends ru.pearx.teleporto.common.items.ItemBase
         if(player instanceof EntityPlayerMP)
         {
             int dimension = stack.getMetadata() == 0 ? world.provider.getDimension() : Teleporto.spawnDimension;
-            BlockPos pos;
-            if(stack.getMetadata() == 0)
-            {
-                pos = world.getTopSolidOrLiquidBlock(world.getSpawnPoint());
-            }
-            else
-            {
-                WorldServer spawn = DimensionManager.getWorld(Teleporto.spawnDimension);
-                pos = spawn.getTopSolidOrLiquidBlock(spawn.getSpawnPoint());
-            }
+            World w = stack.getMetadata() == 0 ? world : DimensionManager.getWorld(Teleporto.spawnDimension);
+            BlockPos pos = w.provider.getSpawnCoordinate();
+            if(pos == null)
+                pos = w.provider.getSpawnPoint();
 
             TeleportationUtils.teleport(pos.getX() + .5, pos.getY(), pos.getZ() + .5,
                     player.rotationYaw, player.rotationPitch, player.getRotationYawHead(), dimension,
