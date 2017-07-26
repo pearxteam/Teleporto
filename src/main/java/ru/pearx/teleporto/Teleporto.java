@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import ru.pearx.libmc.PXLMC;
 import ru.pearx.teleporto.common.CommonProxy;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.networking.NetworkManager;
@@ -19,7 +20,7 @@ import java.util.Collections;
 /*
  * Created by mrAppleXZ on 14.07.17 13:29.
  */
-@Mod(modid = Teleporto.MODID, version = Teleporto.VERSION, acceptedMinecraftVersions = Teleporto.MCVERSION, name = Teleporto.NAME)
+@Mod(modid = Teleporto.MODID, version = Teleporto.VERSION, acceptedMinecraftVersions = Teleporto.MCVERSION, name = Teleporto.NAME, dependencies = "required-after:pxlmc;")
 public class Teleporto
 {
     public static final String NAME = "Teleporto";
@@ -51,7 +52,7 @@ public class Teleporto
         data.version = VERSION;
         data.modId = MODID;
         data.name = NAME;
-        data.dependencies = Arrays.asList(new DefaultArtifactVersion("pxlmc", "[1.0.0,)"));
+        data.dependencies = Arrays.asList(new DefaultArtifactVersion("pxlmc"));
 
         config = e.getSuggestedConfigurationFile();
         Configuration conf = new Configuration(config);
