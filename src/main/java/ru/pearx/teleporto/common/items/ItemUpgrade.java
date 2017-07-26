@@ -65,6 +65,7 @@ public class ItemUpgrade extends ItemBase
         }
     }
 
+    //Don't add your own upgrades there.
     private static final List<Entry> REGISTRY = new ArrayList<>();
     static
     {

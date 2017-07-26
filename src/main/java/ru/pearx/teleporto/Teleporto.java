@@ -35,6 +35,10 @@ public class Teleporto
 
     public static File config;
     public static int spawnDimension;
+    public static String telenergyBarXPos;
+    public static String telenergyBarYPos;
+    public static int telenergyBarXOffset;
+    public static int telenergyBarYOffset;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent e)
@@ -51,7 +55,12 @@ public class Teleporto
 
         config = e.getSuggestedConfigurationFile();
         Configuration conf = new Configuration(config);
-        spawnDimension = conf.getInt("Spawn Dimension", "GENERAL", 0, Integer.MIN_VALUE, Integer.MAX_VALUE, "ID of the dimension that will be used for the Primal Talisman.");
+        spawnDimension = conf.getInt("Spawn Dimension", "GENERAL", 0, Integer.MIN_VALUE, Integer.MAX_VALUE, "ID of the dimension that will be used for the Global Primal Talisman.");
+        telenergyBarXPos = conf.getString("Telenergy Bar X Position", "CLIENT", "right", "Position of the Telenergy Bar on the X axis. Allowed values: left, center, right.", new String[] {"left", "center", "right"});
+        telenergyBarYPos = conf.getString("Telenergy Bar Y Position", "CLIENT", "bottom", "Position of the Telenergy Bar on the Y axis. Allowed values: top, middle, bottom.", new String[] {"top", "middle", "bottom"});
+        telenergyBarXOffset = conf.getInt("Telenergy Bar X Offset", "CLIENT", 0, Integer.MIN_VALUE, Integer.MAX_VALUE, "Offset of the Telenergy Bar on the X axis.");
+        telenergyBarYOffset = conf.getInt("Telenergy Bar Y Offset", "CLIENT", -32, Integer.MIN_VALUE, Integer.MAX_VALUE, "Offset of the Telenergy Bar on the Y axis.");
+
         if(conf.hasChanged())
             conf.save();
 

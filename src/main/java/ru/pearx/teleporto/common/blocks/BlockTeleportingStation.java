@@ -5,11 +5,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -19,6 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import ru.pearx.libmc.common.ItemStackUtils;
 import ru.pearx.teleporto.Teleporto;
+import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.items.ItemRegistry;
 import ru.pearx.teleporto.common.tiles.TileTeleportingStation;
 
@@ -111,13 +116,47 @@ public class BlockTeleportingStation extends BlockBase
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
     {
-        TileEntity te = worldIn.getTileEntity(pos);
+        return willHarvest || super.removedByPlayer(state, world, pos, player, willHarvest);
+    }
+
+    @Override
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack)
+    {
+        super.harvestBlock(world, player, pos, state, te, stack);
+        world.setBlockToAir(pos);
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        TileEntity te = world.getTileEntity(pos);
         if(te != null && te instanceof TileTeleportingStation)
         {
-            ItemStackUtils.drop(te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null), worldIn, pos);
+            ItemStack focus = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0);
+            if(!focus.isEmpty())
+                drops.add(focus);
+            ItemStack stack = new ItemStack(this);
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setTag("telenergy_store", te.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).serializeNBT());
+            stack.setTagCompound(tag);
+            drops.add(stack);
+            return;
         }
-        super.breakBlock(worldIn, pos, state);
+        super.getDrops(drops, world, pos, state, fortune);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    {
+        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("telenergy_store"))
+        {
+            TileEntity te = worldIn.getTileEntity(pos);
+            if (te != null && te instanceof TileTeleportingStation)
+            {
+                te.getCapability(CapabilityRegistry.TELENERGY_STORE_CAP, null).deserializeNBT((NBTTagCompound)stack.getTagCompound().getTag("telenergy_store"));
+            }
+        }
     }
 }

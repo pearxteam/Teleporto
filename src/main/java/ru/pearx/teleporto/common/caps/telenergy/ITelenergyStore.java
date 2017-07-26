@@ -1,6 +1,8 @@
 package ru.pearx.teleporto.common.caps.telenergy;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /*
@@ -26,5 +28,4 @@ public interface ITelenergyStore extends INBTSerializable<NBTTagCompound>
     //Server side only things \/
     int getTicks();
     void setTicks(int count);
-
 }
