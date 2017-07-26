@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
-import ru.pearx.libmc.PXLMC;
 import ru.pearx.teleporto.common.CommonProxy;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.networking.NetworkManager;

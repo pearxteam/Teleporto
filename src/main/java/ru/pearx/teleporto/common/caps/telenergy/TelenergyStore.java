@@ -2,13 +2,8 @@ package ru.pearx.teleporto.common.caps.telenergy;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.common.util.Constants;
 import ru.pearx.teleporto.common.networking.packets.CPacketSyncMaxTelenergy;
 import ru.pearx.teleporto.common.networking.packets.CPacketSyncTelenergy;
 import ru.pearx.teleporto.common.networking.packets.CPacketSyncTelenergyPerSecond;

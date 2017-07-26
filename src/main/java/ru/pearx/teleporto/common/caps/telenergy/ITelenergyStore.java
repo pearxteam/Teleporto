@@ -1,8 +1,6 @@
 package ru.pearx.teleporto.common.caps.telenergy;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /*

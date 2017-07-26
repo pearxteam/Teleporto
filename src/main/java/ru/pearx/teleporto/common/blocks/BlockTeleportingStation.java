@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
-import ru.pearx.libmc.common.ItemStackUtils;
 import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.caps.CapabilityRegistry;
 import ru.pearx.teleporto.common.items.ItemRegistry;
