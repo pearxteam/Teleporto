@@ -12,6 +12,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import ru.pearx.teleporto.Teleporto;
 import ru.pearx.teleporto.common.caps.telenergy.ITelenergyStore;
 import ru.pearx.teleporto.common.networking.NetworkManager;
 import ru.pearx.teleporto.common.networking.packets.CPacketSpawnTeleportParticles;
@@ -58,11 +59,11 @@ public class TeleportationUtils
 
     public static int countTeleport(double x, double y, double z, int dimension, Entity e)
     {
-        int cost = 45;
+        int cost = Teleporto.baseCost;
         if(dimension != e.dimension)
-            cost += 450;
+            cost += Teleporto.crossDimCost;
         else
-            cost += (int)(new Vector3d(Math.abs(x - e.posX), Math.abs(y - e.posY), Math.abs(z - e.posZ)).length() / 20);
+            cost += (int)((new Vector3d(Math.abs(x - e.posX), Math.abs(y - e.posY), Math.abs(z - e.posZ)).length() / Teleporto.blocksToAddPerBlocksCost) * Teleporto.perBlocksCost);
         return cost;
     }
 

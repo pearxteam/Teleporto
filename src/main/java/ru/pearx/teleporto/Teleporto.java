@@ -38,6 +38,10 @@ public class Teleporto
     public static String telenergyBarYPos;
     public static int telenergyBarXOffset;
     public static int telenergyBarYOffset;
+    public static int baseCost;
+    public static int crossDimCost;
+    public static int perBlocksCost;
+    public static int blocksToAddPerBlocksCost;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent e)
@@ -59,6 +63,10 @@ public class Teleporto
         telenergyBarYPos = conf.getString("Telenergy Bar Y Position", "CLIENT", "bottom", "Position of the Telenergy Bar on the Y axis. Allowed values: top, middle, bottom.", new String[] {"top", "middle", "bottom"});
         telenergyBarXOffset = conf.getInt("Telenergy Bar X Offset", "CLIENT", 0, Integer.MIN_VALUE, Integer.MAX_VALUE, "Offset of the Telenergy Bar on the X axis.");
         telenergyBarYOffset = conf.getInt("Telenergy Bar Y Offset", "CLIENT", -32, Integer.MIN_VALUE, Integer.MAX_VALUE, "Offset of the Telenergy Bar on the Y axis.");
+        baseCost = conf.getInt("Base Cost", "TELENERGY_COSTS", 45, 0, Integer.MAX_VALUE, "Base cost for every teleportation.");
+        crossDimCost = conf.getInt("Cross-Dim Cost", "TELENERGY_COSTS", 450, 0, Integer.MAX_VALUE, "Additional cost for cross-dimensional teleportation.");
+        perBlocksCost = conf.getInt("Per Blocks Cost", "TELENERGY_COSTS", 1, 0, Integer.MAX_VALUE, "Additional cost per every x (defined in the \"Blocks To Add Per Blocks Cost\" property) blocks.");
+        blocksToAddPerBlocksCost = conf.getInt("Blocks To Add Per Blocks Cost", "TELENERGY_COSTS", 20, 0, Integer.MAX_VALUE, "Distance in blocks to add the additional per blocks cost.");
 
         if(conf.hasChanged())
             conf.save();
