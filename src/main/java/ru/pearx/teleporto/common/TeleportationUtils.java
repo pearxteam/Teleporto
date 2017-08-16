@@ -62,7 +62,7 @@ public class TeleportationUtils
         int cost = Teleporto.baseCost;
         if(dimension != e.dimension)
             cost += Teleporto.crossDimCost;
-        else
+        else if(Teleporto.blocksToAddPerBlocksCost > 0)
             cost += (int)((new Vector3d(Math.abs(x - e.posX), Math.abs(y - e.posY), Math.abs(z - e.posZ)).length() / Teleporto.blocksToAddPerBlocksCost) * Teleporto.perBlocksCost);
         return cost;
     }
